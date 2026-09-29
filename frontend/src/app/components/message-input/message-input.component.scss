@@ -1,0 +1,47 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.message-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+}
+
+.message-input {
+  @include input-base;
+  flex: 1;
+  padding: 0.75rem $spacing-md;
+  border-radius: $radius-pill;
+  font-size: 0.9rem;
+
+  &:focus {
+    box-shadow: $shadow-focus-sm;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn-send {
+  @include avatar(42px, $primary, white);
+  border: none;
+  cursor: pointer;
+  transition: background-color $transition-base, transform $transition-fast;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+    transform: scale(1.05);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}

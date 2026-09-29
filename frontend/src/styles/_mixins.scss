@@ -1,0 +1,250 @@
+@use 'variables' as *;
+
+// === Responsive Media Queries ===
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (max-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (max-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+// === Flexbox Helpers ===
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// === Card Shadow ===
+@mixin card-shadow {
+  box-shadow: $shadow-md;
+}
+
+// === Text Truncation ===
+@mixin truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// === Custom Scrollbar ===
+@mixin scrollbar-custom(
+  $width: $scrollbar-width,
+  $track: $scrollbar-track,
+  $thumb: $scrollbar-thumb,
+  $thumb-hover: $scrollbar-thumb-hover
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: calc($width / 2);
+
+    &:hover {
+      background: $thumb-hover;
+    }
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+}
+
+// === Spinner Animation ===
+@mixin spinner(
+  $size: 28px,
+  $border-width: 3px,
+  $track-color: $bg-tertiary,
+  $spin-color: $primary
+) {
+  width: $size;
+  height: $size;
+  border: $border-width solid $track-color;
+  border-top-color: $spin-color;
+  border-radius: $radius-full;
+  animation: spin 0.7s linear infinite;
+}
+
+// === Form Input Base ===
+@mixin input-base {
+  width: 100%;
+  background-color: $bg-tertiary;
+  border: 1px solid $border-color;
+  color: $text-primary;
+  font-family: $font-family;
+  outline: none;
+  transition: border-color $transition-base, box-shadow $transition-base;
+
+  &::placeholder {
+    color: $text-secondary;
+    opacity: 0.6;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: $shadow-focus-primary;
+  }
+
+  &.invalid {
+    border-color: $error;
+  }
+}
+
+// === Button Base ===
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color $transition-base;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// === Avatar ===
+@mixin avatar($size: 36px, $bg: $primary, $color: white) {
+  width: $size;
+  height: $size;
+  border-radius: $radius-full;
+  background-color: $bg;
+  color: $color;
+  @include flex-center;
+  font-weight: $font-weight-semibold;
+  flex-shrink: 0;
+}
+
+// === Error Banner ===
+@mixin error-banner {
+  background-color: $error-light;
+  border: 1px solid $error;
+  color: $error;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+}
+
+// === Auth Page Layout ===
+@mixin auth-page {
+  @include flex-center;
+  min-height: 100vh;
+  padding: $spacing-md;
+  background-color: $bg-primary;
+}
+
+// === Auth Card ===
+@mixin auth-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+}
+
+// === Auth Header ===
+@mixin auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 0.9rem;
+  }
+}
+
+// === Auth Footer ===
+@mixin auth-footer {
+  text-align: center;
+  margin-top: $spacing-lg;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $border-color;
+
+  p {
+    color: $text-secondary;
+    font-size: 0.9rem;
+  }
+
+  a {
+    color: $primary;
+    font-weight: $font-weight-medium;
+
+    &:hover {
+      color: $primary-hover;
+    }
+  }
+}
+
+// === Primary Button ===
+@mixin btn-primary {
+  @include btn-base;
+  width: 100%;
+  padding: 0.75rem $spacing-lg;
+  background-color: $primary;
+  color: white;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  gap: $spacing-sm;
+  margin-top: $spacing-sm;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+  }
+}
+
+// === Spin Keyframes ===
+@mixin spin-keyframes {
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// === Line Clamp ===
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

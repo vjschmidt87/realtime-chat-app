@@ -1,0 +1,60 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.login-container {
+  @include auth-page;
+}
+
+.login-card {
+  @include auth-card;
+}
+
+.login-header {
+  @include auth-header;
+}
+
+.error-banner {
+  @include error-banner;
+  padding: 0.75rem $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-secondary;
+    margin-bottom: $spacing-sm;
+  }
+
+  input {
+    @include input-base;
+    padding: 0.75rem $spacing-md;
+    border-radius: $radius-md;
+    font-size: 0.95rem;
+  }
+}
+
+.field-error {
+  margin-top: 0.375rem;
+  font-size: 0.8rem;
+  color: $error;
+}
+
+.btn-primary {
+  @include btn-primary;
+}
+
+.spinner {
+  display: inline-block;
+  @include spinner(16px, 2px, rgba(255, 255, 255, 0.3), white);
+}
+
+@include spin-keyframes;
+
+.login-footer {
+  @include auth-footer;
+}

@@ -1,0 +1,38 @@
+<div class="message-list-container" #scrollContainer (scroll)="onScroll()">
+  @if (isLoading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Loading messages...</span>
+    </div>
+  } @else if (messages.length === 0) {
+    <div class="empty-state">
+      <p>No messages yet.</p>
+      <p class="hint">Be the first to send a message!</p>
+    </div>
+  } @else {
+    <div class="messages">
+      @for (message of messages; track message.id) {
+        @if (isSystemMessage(message)) {
+          <div class="system-message">
+            <span>{{ message.senderDisplayName }} {{ message.type === 'JOIN' ? 'joined the room' : 'left the room' }}</span>
+          </div>
+        } @else {
+          <div class="message-wrapper" [class.own]="isOwnMessage(message)">
+            @if (!isOwnMessage(message)) {
+              <div class="message-avatar">
+                {{ message.senderDisplayName.charAt(0).toUpperCase() }}
+              </div>
+            }
+            <div class="message-bubble" [class.own]="isOwnMessage(message)">
+              @if (!isOwnMessage(message)) {
+                <span class="sender-name">{{ message.senderDisplayName }}</span>
+              }
+              <p class="message-content">{{ message.content }}</p>
+              <span class="message-time">{{ formatTime(message.createdAt) }}</span>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  }
+</div>

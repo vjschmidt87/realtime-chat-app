@@ -1,0 +1,67 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+%btn {
+  @include btn-base;
+}
+
+%btn-primary {
+  @extend %btn;
+  background-color: $primary;
+  color: $text-primary;
+  border-radius: $radius-md;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+  }
+}
+
+%btn-success {
+  @extend %btn;
+  background-color: $success;
+  color: white;
+  border-radius: $radius-md;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+%btn-danger {
+  @extend %btn;
+  background-color: $error;
+  color: white;
+  border-radius: $radius-md;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+%btn-ghost {
+  @extend %btn;
+  background: none;
+  color: $text-secondary;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+
+  &:hover {
+    background-color: $bg-tertiary;
+    color: $text-primary;
+  }
+}
+
+%btn-sm {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+}
+
+%btn-lg {
+  padding: $spacing-md $spacing-lg;
+  font-size: $font-size-md;
+}
+
+%btn-block {
+  display: flex;
+  width: 100%;
+}

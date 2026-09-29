@@ -1,0 +1,83 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.chat-room-container {
+  @include flex-column;
+  height: 100vh;
+  background-color: $bg-primary;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  background-color: $bg-secondary;
+  border-bottom: 1px solid $border-color;
+  flex-shrink: 0;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  color: $text-secondary;
+  padding: 0.375rem;
+  border-radius: 6px;
+  @include flex-center;
+  transition: background-color $transition-base, color $transition-base;
+
+  &:hover {
+    background-color: $bg-tertiary;
+    color: $text-primary;
+  }
+}
+
+.room-info {
+  flex: 1;
+  min-width: 0;
+
+  h2 {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: 0.125rem;
+  }
+}
+
+.room-meta {
+  font-size: $font-size-xs;
+  color: $text-secondary;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: $font-size-xs;
+  color: $text-secondary;
+  flex-shrink: 0;
+
+  &.connected .status-dot {
+    background-color: $success;
+  }
+}
+
+.status-dot {
+  width: $spacing-sm;
+  height: $spacing-sm;
+  border-radius: $radius-full;
+  background-color: $error;
+  transition: background-color $transition-slow;
+}
+
+.chat-body {
+  flex: 1;
+  overflow: hidden;
+  @include flex-column;
+}
+
+.chat-footer {
+  flex-shrink: 0;
+  border-top: 1px solid $border-color;
+  background-color: $bg-secondary;
+}

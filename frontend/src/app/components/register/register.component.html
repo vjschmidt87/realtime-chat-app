@@ -1,0 +1,149 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="register-header">
+      <h1>Create Account</h1>
+      <p>Join Real-Time Chat today</p>
+    </div>
+
+    @if (errorMessage) {
+      <div class="error-banner">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Choose a username"
+          [class.invalid]="f['username'].touched && f['username'].invalid"
+          autocomplete="username"
+        >
+        @if (f['username'].touched && f['username'].errors) {
+          <div class="field-error">
+            @if (f['username'].errors['required']) {
+              <span>Username is required.</span>
+            }
+            @if (f['username'].errors['minlength']) {
+              <span>Username must be at least 3 characters.</span>
+            }
+            @if (f['username'].errors['maxlength']) {
+              <span>Username cannot exceed 20 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="displayName">Display Name</label>
+        <input
+          id="displayName"
+          type="text"
+          formControlName="displayName"
+          placeholder="Your display name"
+          [class.invalid]="f['displayName'].touched && f['displayName'].invalid"
+          autocomplete="name"
+        >
+        @if (f['displayName'].touched && f['displayName'].errors) {
+          <div class="field-error">
+            @if (f['displayName'].errors['required']) {
+              <span>Display name is required.</span>
+            }
+            @if (f['displayName'].errors['minlength']) {
+              <span>Display name must be at least 2 characters.</span>
+            }
+            @if (f['displayName'].errors['maxlength']) {
+              <span>Display name cannot exceed 50 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="your@email.com"
+          [class.invalid]="f['email'].touched && f['email'].invalid"
+          autocomplete="email"
+        >
+        @if (f['email'].touched && f['email'].errors) {
+          <div class="field-error">
+            @if (f['email'].errors['required']) {
+              <span>Email is required.</span>
+            }
+            @if (f['email'].errors['email']) {
+              <span>Please enter a valid email address.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="At least 6 characters"
+          [class.invalid]="f['password'].touched && f['password'].invalid"
+          autocomplete="new-password"
+        >
+        @if (f['password'].touched && f['password'].errors) {
+          <div class="field-error">
+            @if (f['password'].errors['required']) {
+              <span>Password is required.</span>
+            }
+            @if (f['password'].errors['minlength']) {
+              <span>Password must be at least 6 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Repeat your password"
+          [class.invalid]="f['confirmPassword'].touched && f['confirmPassword'].invalid"
+          autocomplete="new-password"
+        >
+        @if (f['confirmPassword'].touched && f['confirmPassword'].errors) {
+          <div class="field-error">
+            @if (f['confirmPassword'].errors['required']) {
+              <span>Please confirm your password.</span>
+            }
+            @if (f['confirmPassword'].errors['passwordMismatch']) {
+              <span>Passwords do not match.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="isLoading"
+      >
+        @if (isLoading) {
+          <span class="spinner"></span>
+          Creating account...
+        } @else {
+          Create Account
+        }
+      </button>
+    </form>
+
+    <div class="register-footer">
+      <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+    </div>
+  </div>
+</div>

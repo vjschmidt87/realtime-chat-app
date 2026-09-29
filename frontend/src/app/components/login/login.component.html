@@ -1,0 +1,77 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Welcome Back</h1>
+      <p>Sign in to continue to Real-Time Chat</p>
+    </div>
+
+    @if (errorMessage) {
+      <div class="error-banner">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Enter your username"
+          [class.invalid]="f['username'].touched && f['username'].invalid"
+          autocomplete="username"
+        >
+        @if (f['username'].touched && f['username'].errors) {
+          <div class="field-error">
+            @if (f['username'].errors['required']) {
+              <span>Username is required.</span>
+            }
+            @if (f['username'].errors['minlength']) {
+              <span>Username must be at least 3 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+          [class.invalid]="f['password'].touched && f['password'].invalid"
+          autocomplete="current-password"
+        >
+        @if (f['password'].touched && f['password'].errors) {
+          <div class="field-error">
+            @if (f['password'].errors['required']) {
+              <span>Password is required.</span>
+            }
+            @if (f['password'].errors['minlength']) {
+              <span>Password must be at least 6 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="isLoading"
+      >
+        @if (isLoading) {
+          <span class="spinner"></span>
+          Signing in...
+        } @else {
+          Sign In
+        }
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p>Don't have an account? <a routerLink="/register">Create one</a></p>
+    </div>
+  </div>
+</div>

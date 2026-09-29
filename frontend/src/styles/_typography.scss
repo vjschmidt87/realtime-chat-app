@@ -1,0 +1,55 @@
+@use 'variables' as *;
+
+%heading-base {
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $text-primary;
+}
+
+%heading-1 {
+  @extend %heading-base;
+  font-size: $font-size-3xl;
+}
+
+%heading-2 {
+  @extend %heading-base;
+  font-size: $font-size-2xl;
+}
+
+%heading-3 {
+  @extend %heading-base;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+}
+
+%text-body {
+  font-family: $font-family;
+  font-size: $font-size-md;
+  line-height: $line-height-base;
+  color: $text-primary;
+}
+
+%text-caption {
+  font-family: $font-family;
+  font-size: $font-size-xs;
+  color: $text-secondary;
+}
+
+%text-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+  letter-spacing: 0.02em;
+}
+
+%link {
+  color: $primary;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-hover;
+    text-decoration: underline;
+  }
+}

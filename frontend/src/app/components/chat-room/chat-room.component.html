@@ -1,0 +1,35 @@
+<div class="chat-room-container">
+  <header class="chat-header">
+    <button class="btn-back" (click)="goBack()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <div class="room-info">
+      @if (room) {
+        <h2>{{ room.name }}</h2>
+        <span class="room-meta">{{ room.memberCount }} members</span>
+      }
+    </div>
+    <div class="connection-status" [class.connected]="isConnected">
+      <span class="status-dot"></span>
+      {{ isConnected ? 'Connected' : 'Reconnecting...' }}
+    </div>
+  </header>
+
+  <div class="chat-body">
+    <app-message-list
+      [messages]="messages"
+      [currentUsername]="currentUsername"
+      [isLoading]="isLoading"
+    ></app-message-list>
+  </div>
+
+  <div class="chat-footer">
+    <app-message-input
+      [disabled]="!isConnected"
+      (messageSent)="onMessageSent($event)"
+    ></app-message-input>
+  </div>
+</div>
